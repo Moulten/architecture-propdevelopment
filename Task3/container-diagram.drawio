@@ -1,0 +1,318 @@
+<mxfile host="app.diagrams.net" version="24.8.0">
+  <diagram name="C4 Контейнеры — PropDevelopment (обновлённая)" id="prop-dev-containers-updated">
+    <mxGraphModel dx="2400" dy="1800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2800" pageHeight="2000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ===== ЛЕГЕНДА ===== -->
+        <mxCell id="leg-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#999999;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="30" width="700" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg-title" value="ЛЕГЕНДА" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="70" y="38" width="200" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg-existing" value="Существующий контейнер" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="75" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg-new" value="🆕 Новый контейнер" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="285" y="75" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg-external" value="Внешняя система" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;strokeColor=#736782;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="75" width="200" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== PROPDEV SYSTEM BOUNDARY ===== -->
+        <mxCell id="sys-boundary" value="PropDevelopment [Software System]" style="rounded=1;fontSize=13;whiteSpace=wrap;html=1;dashed=1;arcSize=2;fillColor=none;strokeColor=#444444;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;spacing=10;dashPattern=8 4;pointerEvents=0;connectable=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="160" width="2200" height="1730" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== FIREWALL / EXTERNAL USERS ===== -->
+        <mxCell id="fw-label-clients" value="Firewall" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="315" y="220" width="80" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="fw-icon-clients" value="" style="image;html=1;image=img/lib/clip_art/networking/Firewall_02_128x128.png;" vertex="1" parent="1">
+          <mxGeometry x="280" y="235" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fw-label-owners" value="Firewall" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1315" y="220" width="80" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="fw-icon-owners" value="" style="image;html=1;image=img/lib/clip_art/networking/Firewall_02_128x128.png;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="235" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== ГРУППА СЕРВИСОВ ДЛЯ КЛИЕНТОВ ===== -->
+        <mxCell id="clients-group" value="Группа сервисов для клиентов" style="rounded=1;fontSize=12;whiteSpace=wrap;html=1;dashed=1;arcSize=5;fillColor=none;strokeColor=#0E7DAD;fontColor=#0E7DAD;labelBackgroundColor=none;align=left;verticalAlign=bottom;spacing=8;dashPattern=5 3;pointerEvents=0;connectable=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="310" width="950" height="780" as="geometry"/>
+        </mxCell>
+
+        <!-- Витрина продаж -->
+        <mxCell id="sales-showcase" value="&lt;b&gt;Витрина продаж&lt;/b&gt;&lt;br&gt;[Container: JavaScript, React]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Подбор и бронирование объектов недвижимости&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="150" y="370" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- client-tour-app -->
+        <mxCell id="tour-app" value="&lt;b&gt;client-tour-app&lt;/b&gt;&lt;br&gt;[Container: Kotlin, SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Приложение для онлайн-тура по объектам&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="420" y="370" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- client-mart-app -->
+        <mxCell id="mart-app" value="&lt;b&gt;client-mart-app&lt;/b&gt;&lt;br&gt;[Container: Kotlin, SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Онлайн-сделки с недвижимостью&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="690" y="370" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- client-crm-app -->
+        <mxCell id="crm-app" value="&lt;b&gt;client-crm-app&lt;/b&gt;&lt;br&gt;[Container: SpringBoot, Dynamics CRM]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Управление клиентскими данными&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="150" y="520" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- client-mart-estate-app -->
+        <mxCell id="estate-app" value="&lt;b&gt;client-mart-estate-app&lt;/b&gt;&lt;br&gt;[Container: Kotlin, SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Управление данными об объектах&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="420" y="520" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- auth-service-1 -->
+        <mxCell id="auth1" value="&lt;b&gt;auth-service-1&lt;/b&gt;&lt;br&gt;[Container: Keycloak]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Аутентификация покупателей&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="690" y="520" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- DBs for client group -->
+        <mxCell id="crm-db" value="&lt;b&gt;crm-db&lt;/b&gt;&lt;br&gt;[MSSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="155" y="665" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="estate-db" value="&lt;b&gt;client-mart-estate-db&lt;/b&gt;&lt;br&gt;[PostgreSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="390" y="665" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="mart-db" value="&lt;b&gt;client-mart-db&lt;/b&gt;&lt;br&gt;[PostgreSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="665" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="auth1-db" value="&lt;b&gt;auth-db-1&lt;/b&gt;&lt;br&gt;[PostgreSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="665" width="180" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== ГРУППА СЕРВИСОВ ЖКУ ===== -->
+        <mxCell id="jku-group" value="Группа сервисов ЖКУ" style="rounded=1;fontSize=12;whiteSpace=wrap;html=1;dashed=1;arcSize=5;fillColor=none;strokeColor=#0E7DAD;fontColor=#0E7DAD;labelBackgroundColor=none;align=left;verticalAlign=bottom;spacing=8;dashPattern=5 3;pointerEvents=0;connectable=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="310" width="1100" height="780" as="geometry"/>
+        </mxCell>
+
+        <!-- Витрина сервисов для собственников (Mobile App) -->
+        <mxCell id="mobile-app" value="&lt;b&gt;Витрина сервисов для собственников&lt;/b&gt;&lt;br&gt;[Container: Mobile App iOS/Android]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Оплата ЖКУ, информация о ЖК, Умный дом (новые функции)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="370" width="240" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- auth-service-2 (owners) -->
+        <mxCell id="auth2" value="&lt;b&gt;auth-service-2&lt;/b&gt;&lt;br&gt;[Container: Keycloak]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Аутентификация собственников&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="530" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- tenant-core-app -->
+        <mxCell id="tenant-core" value="&lt;b&gt;tenant-core-app&lt;/b&gt;&lt;br&gt;[Container: Kotlin, SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Предоставление услуг собственникам (ЖКУ, ремонты)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="370" width="240" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- CRM (owners) -->
+        <mxCell id="crm-owners" value="&lt;b&gt;CRM (собственники)&lt;/b&gt;&lt;br&gt;[Container: Kotlin, Spring Boot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Управление данными собственников&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="530" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 smart-home-service [NEW] -->
+        <mxCell id="smart-home-svc" value="&lt;b&gt;🆕 smart-home-service&lt;/b&gt;&lt;br&gt;[Container: Kotlin, SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;НОВЫЙ. Управляет логикой умного домофона и шлагбаума. Хранит списки авторизованных лиц и номеров авто по ЖК.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=#b85450;arcSize=5;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="685" width="240" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 partner-api-gateway [NEW] -->
+        <mxCell id="api-gw" value="&lt;b&gt;🆕 partner-api-gateway&lt;/b&gt;&lt;br&gt;[Container: API Gateway]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;НОВЫЙ. Единая точка входа для всех партнёрских интеграций. OAuth 2.0, rate limiting, аудит-лог, изоляция данных по ЖК.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=#b85450;arcSize=5;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="685" width="240" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 smart-home-db [NEW] -->
+        <mxCell id="smart-home-db" value="&lt;b&gt;🆕 smart-home-db&lt;/b&gt;&lt;br&gt;[PostgreSQL]&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;Списки доступа по ЖК&lt;/font&gt;" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="855" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- DBs for JKU group -->
+        <mxCell id="tenant-db" value="&lt;b&gt;tenant-core-db&lt;/b&gt;&lt;br&gt;[PostgreSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="855" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="crm-owners-db" value="&lt;b&gt;crm-tenant-db&lt;/b&gt;&lt;br&gt;[PostgreSQL]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="855" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== ФИНАНСЫ / ДАННЫЕ (bottom) ===== -->
+        <!-- Active Directory -->
+        <mxCell id="ad" value="&lt;b&gt;Active Directory&lt;/b&gt;&lt;br&gt;[Container: MS Active Directory]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Служба каталогов для бизнес-систем&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1150" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- accountant-service-1 -->
+        <mxCell id="accountant" value="&lt;b&gt;accountant-service-1&lt;/b&gt;&lt;br&gt;[Container: SpringBoot]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Система бухгалтерского учёта&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1310" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- DWH - Хранилище данных -->
+        <mxCell id="dwh" value="&lt;b&gt;Хранилище данных&lt;/b&gt;&lt;br&gt;[Container: Greenplum]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Единое корпоративное DWH&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1230" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- DWH Storage S3 -->
+        <mxCell id="s3" value="&lt;b&gt;DWH Хранилище&lt;/b&gt;&lt;br&gt;[Container: S3]" style="shape=cylinder3;size=12;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1400" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- BI -->
+        <mxCell id="bi" value="&lt;b&gt;BI и отчётность&lt;/b&gt;&lt;br&gt;[Container]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#E6E6E6&quot;&gt;Аналитика и отчётность&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#23A2D9;fontColor=#ffffff;strokeColor=#0E7DAD;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1230" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== ВНЕШНИЕ СИСТЕМЫ (за пределами boundary) ===== -->
+        <!-- 🆕 Партнёр Умный дом [NEW] -->
+        <mxCell id="smart-partner-ext" value="&lt;b&gt;🆕 Партнёр «Умный дом»&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;Платформа партнёра. API для интеллектуального домофона (биометрия) и шлагбаума (номера авто).&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6d3d3d;fontColor=#ffffff;strokeColor=#b85450;arcSize=5;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="470" width="260" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 Умный домофон sub-system -->
+        <mxCell id="intercom" value="&lt;b&gt;Умный домофон&lt;/b&gt;&lt;br&gt;[Sub-system: Biometric API]&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;Распознавание лиц, открытие двери&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;fontColor=#ffffff;strokeColor=#6d3d3d;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="330" width="260" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 Умный шлагбаум sub-system -->
+        <mxCell id="barrier" value="&lt;b&gt;Умный шлагбаум&lt;/b&gt;&lt;br&gt;[Sub-system: License Plate API]&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#ffffff&quot;&gt;Распознавание номеров, открытие шлагбаума&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;fontColor=#ffffff;strokeColor=#6d3d3d;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="660" width="260" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Поставщик ресурсов ЖКХ -->
+        <mxCell id="jkh-ext" value="&lt;b&gt;Поставщик ресурсов ЖКХ&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#cccccc&quot;&gt;Системы управляющих компаний&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;strokeColor=#736782;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="830" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Платёжная система -->
+        <mxCell id="payment-ext" value="&lt;b&gt;Платёжная система&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#cccccc&quot;&gt;Провайдер онлайн-платежей&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;strokeColor=#736782;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="1010" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Госорганы -->
+        <mxCell id="gov-ext" value="&lt;b&gt;Государственные органы&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#cccccc&quot;&gt;Росреестр, регистрация сделок&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;strokeColor=#736782;arcSize=5;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="1190" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== EDGES ===== -->
+        <!-- Firewall → Витрина продаж -->
+        <mxCell id="e-fw1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="fw-icon-clients" target="sales-showcase" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Firewall → Mobile App -->
+        <mxCell id="e-fw2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="fw-icon-owners" target="mobile-app" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Витрина продаж → mart-app, crm-app, auth1 -->
+        <mxCell id="e-sc1" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="sales-showcase" target="mart-app" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-sc2" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="sales-showcase" target="crm-app" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-sc3" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="sales-showcase" target="estate-app" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-sc4" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="sales-showcase" target="auth1" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- DBs connections (client group) -->
+        <mxCell id="e-db1" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="crm-app" target="crm-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-db2" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="estate-app" target="estate-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-db3" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="mart-app" target="mart-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-db4" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="auth1" target="auth1-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Mobile App → auth2, tenant-core, smart-home-svc [NEW] -->
+        <mxCell id="e-mob1" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="mobile-app" target="auth2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mob2" value="[REST, WS]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="mobile-app" target="tenant-core" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mob3" value="🆕 [REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;strokeColor=#d79b00;fontColor=#d79b00;fontStyle=1;" edge="1" source="mobile-app" target="smart-home-svc" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- tenant-core → CRM, tenant-db -->
+        <mxCell id="e-tc1" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="tenant-core" target="tenant-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-tc2" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="tenant-core" target="crm-owners" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CRM owners → crm-tenant-db -->
+        <mxCell id="e-crm2" value="[JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="crm-owners" target="crm-owners-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 smart-home-svc → smart-home-db, partner-api-gateway -->
+        <mxCell id="e-sh1" value="🆕 [JDBC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;strokeColor=#d79b00;fontColor=#d79b00;fontStyle=1;" edge="1" source="smart-home-svc" target="smart-home-db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-sh2" value="🆕 [REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;strokeColor=#d79b00;fontColor=#d79b00;fontStyle=1;" edge="1" source="smart-home-svc" target="api-gw" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- tenant-core → api-gateway (existing JKH now through gateway too) -->
+        <mxCell id="e-tc-gw" value="🆕 [REST] (перенос через gateway)" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;strokeColor=#d79b00;fontColor=#d79b00;fontStyle=1;" edge="1" source="tenant-core" target="api-gw" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 🆕 api-gateway → external systems -->
+        <mxCell id="e-gw1" value="🆕 [REST, OAuth 2.0, TLS 1.3]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;strokeColor=#b85450;fontColor=#b85450;fontStyle=1;" edge="1" source="api-gw" target="smart-partner-ext" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-gw2" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="api-gw" target="jkh-ext" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-gw3" value="[REST]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="api-gw" target="payment-ext" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- mart-app → gov-ext -->
+        <mxCell id="e-gov" value="[REST / СМЭВ]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="mart-app" target="gov-ext" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Partner → sub-systems -->
+        <mxCell id="e-p1" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="smart-partner-ext" target="intercom" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-p2" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="smart-partner-ext" target="barrier" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CDC flows to DWH -->
+        <mxCell id="e-cdc1" value="[CDC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;dashed=1;" edge="1" source="crm-db" target="dwh" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-cdc2" value="[CDC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;dashed=1;" edge="1" source="tenant-db" target="dwh" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-cdc3" value="[CDC]" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;dashed=1;" edge="1" source="mart-db" target="dwh" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-dwh" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="dwh" target="s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-bi" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="dwh" target="bi" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
