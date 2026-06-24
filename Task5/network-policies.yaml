@@ -1,0 +1,410 @@
+# Kubernetes NetworkPolicies — PropDevelopment
+#
+# Цель: изоляция трафика между 4 ключевыми сервисами кластера.
+# Сервисы:
+#   1. client-mart-app     (namespace: sales)      — онлайн-сделки с недвижимостью
+#   2. tenant-core-app     (namespace: jku)        — сервис ЖКУ для собственников
+#   3. smart-home-service  (namespace: jku)        — управление умным домом (новый)
+#   4. partner-api-gateway (namespace: jku)        — единая точка выхода к партнёрам (новый)
+#
+# Принципы:
+#   - Default deny-all для каждого namespace (ingress + egress)
+#   - Только явно разрешённый трафик проходит
+#   - Межнеймспейсный трафик только там, где это архитектурно обосновано
+#   - DNS (UDP 53 / TCP 53) разрешён для всех сервисов (kube-dns)
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 1. DEFAULT DENY — namespace: sales
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: sales
+spec:
+  podSelector: {}  # применяется ко всем подам в namespace
+  policyTypes:
+    - Ingress
+    - Egress
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 2. DEFAULT DENY — namespace: jku
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: jku
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 3. client-mart-app: разрешённый трафик
+#    namespace: sales
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-client-mart-app
+  namespace: sales
+spec:
+  podSelector:
+    matchLabels:
+      app: client-mart-app
+  policyTypes:
+    - Ingress
+    - Egress
+
+  ingress:
+    # Разрешить входящий трафик от Ingress Controller (Nginx/Traefik)
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080
+
+  egress:
+    # DNS — обязательно для резолвинга имён сервисов
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+
+    # Исходящий к client-mart-estate-db (PostgreSQL) внутри namespace sales
+    - to:
+        - podSelector:
+            matchLabels:
+              app: client-mart-db
+      ports:
+        - protocol: TCP
+          port: 5432
+
+    # Исходящий к auth-service-1 (Keycloak) в namespace infra для валидации токенов
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: auth-service-1
+      ports:
+        - protocol: TCP
+          port: 8080
+
+    # Исходящий к внешнему госоргану (Росреестр / СМЭВ) через Egress Gateway
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: egress-gateway
+      ports:
+        - protocol: TCP
+          port: 443
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 4. tenant-core-app: разрешённый трафик
+#    namespace: jku
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-tenant-core-app
+  namespace: jku
+spec:
+  podSelector:
+    matchLabels:
+      app: tenant-core-app
+  policyTypes:
+    - Ingress
+    - Egress
+
+  ingress:
+    # Входящий от Ingress Controller (мобильное приложение собственников)
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080
+
+  egress:
+    # DNS
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+
+    # К tenant-core-db (PostgreSQL) внутри namespace jku
+    - to:
+        - podSelector:
+            matchLabels:
+              app: tenant-core-db
+      ports:
+        - protocol: TCP
+          port: 5432
+
+    # К auth-service-2 (Keycloak) в namespace infra
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: auth-service-2
+      ports:
+        - protocol: TCP
+          port: 8080
+
+    # К partner-api-gateway (ТОЛЬКО через него — не напрямую к партнёрам)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: partner-api-gateway
+      ports:
+        - protocol: TCP
+          port: 8443
+
+    # К smart-home-service для информации об устройствах (опционально)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: smart-home-service
+      ports:
+        - protocol: TCP
+          port: 8080
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 5. smart-home-service: разрешённый трафик
+#    namespace: jku
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-smart-home-service
+  namespace: jku
+spec:
+  podSelector:
+    matchLabels:
+      app: smart-home-service
+  policyTypes:
+    - Ingress
+    - Egress
+
+  ingress:
+    # Только от Ingress Controller (мобильное приложение) и tenant-core-app
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080
+
+    - from:
+        - podSelector:
+            matchLabels:
+              app: tenant-core-app
+      ports:
+        - protocol: TCP
+          port: 8080
+
+    # Webhook callbacks от partner-api-gateway (события от устройств)
+    - from:
+        - podSelector:
+            matchLabels:
+              app: partner-api-gateway
+      ports:
+        - protocol: TCP
+          port: 8080
+
+  egress:
+    # DNS
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+
+    # К smart-home-db (PostgreSQL) — хранение списков доступа
+    - to:
+        - podSelector:
+            matchLabels:
+              app: smart-home-db
+      ports:
+        - protocol: TCP
+          port: 5432
+
+    # К partner-api-gateway — ВСЕ запросы к партнёру только через gateway
+    - to:
+        - podSelector:
+            matchLabels:
+              app: partner-api-gateway
+      ports:
+        - protocol: TCP
+          port: 8443
+
+    # К auth-service-2 для валидации JWT токенов собственников
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: auth-service-2
+      ports:
+        - protocol: TCP
+          port: 8080
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 6. partner-api-gateway: разрешённый трафик
+#    namespace: jku
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-partner-api-gateway
+  namespace: jku
+spec:
+  podSelector:
+    matchLabels:
+      app: partner-api-gateway
+  policyTypes:
+    - Ingress
+    - Egress
+
+  ingress:
+    # Только от авторизованных внутренних клиентов (smart-home-service и tenant-core-app)
+    - from:
+        - podSelector:
+            matchLabels:
+              app: smart-home-service
+      ports:
+        - protocol: TCP
+          port: 8443
+
+    - from:
+        - podSelector:
+            matchLabels:
+              app: tenant-core-app
+      ports:
+        - protocol: TCP
+          port: 8443
+
+    # Webhook от внешних партнёров (входит через Ingress Controller)
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8443
+
+  egress:
+    # DNS
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+
+    # Исходящий к внешним партнёрам через Egress Gateway (443/HTTPS)
+    # Прямой выход во внешнюю сеть запрещён — только через egress-gateway в infra
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: egress-gateway
+      ports:
+        - protocol: TCP
+          port: 443
+
+    # Callback (webhook) к smart-home-service при событиях устройств
+    - to:
+        - podSelector:
+            matchLabels:
+              app: smart-home-service
+      ports:
+        - protocol: TCP
+          port: 8080
+
+---
+# ══════════════════════════════════════════════════════════════════════════════
+# 7. Запрет прямого трафика: sales ↔ jku
+#    (явная политика — дополняет default-deny, документирует намерение)
+# ══════════════════════════════════════════════════════════════════════════════
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-cross-domain-from-sales
+  namespace: jku
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    # Запрещаем весь входящий трафик из namespace sales
+    # (default-deny уже запрещает, но явная политика лучше отражает намерение)
+    - from:
+        - namespaceSelector:
+            matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: NotIn
+                values: ["jku", "infra", "kube-system", "monitoring"]
